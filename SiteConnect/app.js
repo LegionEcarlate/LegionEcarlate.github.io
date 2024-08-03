@@ -10,7 +10,7 @@ var config = {
 }
 
 app.get("/", (request, response) => {
-  response.send("login with discord: <a href='https://discord.com/oauth2/authorize?client_id=1269364571236208732&response_type=code&redirect_uri=https%3A%2F%2Flegionecarlate.github.io%2F&scope=identify'>login</a>")
+  response.send("login with discord: <a href='https://discord.com/oauth2/authorize?client_id=1269364571236208732&response_type=code&redirect_uri=https%3A%2F%2Flegionecarlate.github.io%2FSiteConnect%2Findex&scope=identify'>login</a>")
 })
 
 app.get("/authorize", (request, response) => {
