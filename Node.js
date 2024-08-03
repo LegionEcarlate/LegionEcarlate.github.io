@@ -4,7 +4,15 @@ const app = express();
 
 const clientID = '1269364571236208732';
 const clientSecret = 'a-asTusbjIeteGo4vaLiR_w_Mv4b3wu2';
-const redirectURI = 'https://legionecarlate.github.io/';
+const redirectURI = 'https://legionecarlate.github.io/flotte';
+
+app.use(session({
+    secret: 'votre_secret_de_session',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/callback', async (req, res) => {
     const code = req.query.code;
@@ -32,12 +40,26 @@ app.get('/callback', async (req, res) => {
 
         const user = userResponse.data;
 
-        // Gérer la connexion de l'utilisateur (par exemple, créer une session)
-        res.send(`Bonjour, ${user.username}!`);
+        // Stocker les informations de l'utilisateur dans la session
+        req.session.user = user;
+
+        res.redirect('/');
     } catch (error) {
         console.error(error);
         res.send('Erreur lors de la connexion avec Discord.');
     }
+});
+
+app.get('/user-info', (req, res) => {
+    if (req.session.user) {
+        res.json(req.session.user);
+    } else {
+        res.json(null);
+    }
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(3000, () => {

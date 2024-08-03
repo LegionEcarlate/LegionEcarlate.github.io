@@ -17,10 +17,22 @@
 <main>
     <section>
         <h2>Connexion</h2>
-        <a href="https://discord.com/api/oauth2/authorize?client_id=1269364571236208732&redirect_uri=https://legionecarlate.github.io/&response_type=code&scope=identify">
+        <a href="https://discord.com/api/oauth2/authorize?client_id=1269364571236208732&redirect_uri=https://legionecarlate.github.io/flotte&response_type=code&scope=identify">
             <button class="discord-button">Se connecter avec Discord</button>
         </a>
     </section>
+    <h1>V1</h1>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/user-info')
+            .then(response => response.json())
+            .then(user => {
+                if (user) {
+                    document.getElementById('user-info').innerText = `Connecté en tant que ${user.username}`;
+                }
+            });
+    });
+</script>
 </body>
 </html>
