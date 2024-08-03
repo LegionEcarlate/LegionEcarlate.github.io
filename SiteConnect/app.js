@@ -6,7 +6,7 @@ const app = express()
 var config = {
   "clientId": "1269364571236208732",
   "clientSecret": "Wnpi43bex3nfwGUmYqmQ7DieCzmqAt7l",
-  "redirectUri": "https://legionecarlate.github.io/"
+  "redirectUri": "https://legionecarlate.github.io/SiteConnect/index"
 }
 
 app.get("/", (request, response) => {
