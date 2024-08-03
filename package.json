@@ -2,9 +2,9 @@
   "name": "mon-projet",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "Node.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node Node.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
