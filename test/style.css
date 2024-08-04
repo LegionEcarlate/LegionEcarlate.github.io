@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.banner {
+    background-color: #7289da;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.banner .user-info {
+    display: flex;
+    align-items: center;
+}
+.banner .user-info img {
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+.banner .login-btn {
+    background-color: #ffffff;
+    color: #7289da;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
