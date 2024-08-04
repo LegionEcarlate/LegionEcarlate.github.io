@@ -4,16 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discord Login</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="banner">
-    <h1>Mon Site</h1>
-    <div id="user-info" class="user-info">
-        <a id="login-link" class="login-btn" href="https://discord.com/oauth2/authorize?client_id=1269364571236208732&response_type=code&redirect_uri=https%3A%2F%2Flegionecarlate.github.io%2Ftest%2Findex.html&scope=identify">Se connecter</a>
-    </div>
+<div id="content">
+    <h1>Se connecter avec Discord</h1>
+    <a href="https://discord.com/oauth2/authorize?client_id=1269364571236208732&response_type=code&redirect_uri=https%3A%2F%2Flegionecarlate.github.io%2Ftest%2Findex.html&scope=identify">Se connecter</a>
 </div>
 
-<script src="script.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+        fetch('https://discord.com/api/oauth2/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                'client_id': '1269364571236208732',
+                'client_secret': 'xmu4zoCHo2PMIAXMXTpKTOwwz8xboXRa',
+                'grant_type': 'authorization_code',
+                'code': code,
+                'redirect_uri': 'https://legionecarlate.github.io/test/index.html'
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                return fetch('https://discord.com/api/users/@me', {
+                    headers: {
+                        'Authorization': `Bearer ${data.access_token}`
+                    }
+                });
+            })
+            .then(response => response.json())
+            .then(user => {
+                document.getElementById('content').innerHTML = `<h1>Bienvenue, ${user.username}#${user.discriminator}!</h1>`;
+            })
+            .catch(console.error);
+    }
+</script>
 </body>
 </html>
