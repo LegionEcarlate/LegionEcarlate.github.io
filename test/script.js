@@ -25,7 +25,11 @@ if (code) {
         })
         .then(response => response.json())
         .then(user => {
-            document.getElementById('content').innerHTML = `<h1>Bienvenue, ${user.username}#${user.discriminator}!</h1>`;
+            const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+            document.getElementById('user-info').innerHTML = `
+                <img src="${avatarUrl}" alt="Avatar">
+                <span>${user.username}</span>
+            `;
         })
         .catch(console.error);
 }
